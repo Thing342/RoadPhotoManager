@@ -26,7 +26,7 @@
     </form>
     {% for photo in photos %}
       <div>
-        <img src="badsrc.png" alt="{{ photo.alt_text }}">
+        <img src="badsrc.png" alt="{{ photo.alt_text }}"><p>{{ photo.photo_type }}</p>
         <p>({{ photo.uploaded_at }}) - {{ photo.caption }}</p>
       </div>
     {% endfor %}

@@ -18,6 +18,7 @@ extern crate rocket_contrib; // Rocket APIS
 pub mod models;
 pub mod schema;
 
+pub mod controllers;
 
 use dotenv::dotenv;
 use diesel::prelude::*;
