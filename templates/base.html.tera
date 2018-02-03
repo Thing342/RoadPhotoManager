@@ -11,11 +11,11 @@
   <h1>Rocket CMS Demo</h1>
   <div class="container">
     <form action="/" method="post">
-      <label for="caption">Caption: </label>
+      <label for="photo-caption">Caption: </label>
       <input type="text" name="caption" id="photo-caption">
-      <label for="alt_text">Alt Text: </label>
+      <label for="photo-alt-text">Alt Text: </label>
       <input type="text" name="alt_text" id="photo-alt-text">
-      <label for="photo_type">Photo Type: </label>
+      <label for="photo-type">Photo Type: </label>
       <select name="photo_type" id="photo-type">
         <option value="UNCAT">Uncategorized</option>
         <option value="BGS">BGS</option>
@@ -24,12 +24,6 @@
       </select>
       <input type="submit">
     </form>
-    {% for photo in photos %}
-      <div>
-        <img src="badsrc.png" alt="{{ photo.alt_text }}"><p>{{ photo.photo_type }}</p>
-        <p>({{ photo.uploaded_at }}) - {{ photo.caption }}</p>
-      </div>
-    {% endfor %}
   </div>
 </body>
 </html>

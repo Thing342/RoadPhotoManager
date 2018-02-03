@@ -24,7 +24,7 @@ fn favicon() -> rocket::response::Redirect {
 fn main() {
   rocket::ignite()
     .manage(create_db_pool()) // Register connection pool
-    .mount("/", routes![controllers::photo::index, controllers::photo::new, static_content, favicon])
+    .mount("/", routes![controllers::photo::index, controllers::photo::new, controllers::photo::show, static_content, favicon])
     .attach(rocket_contrib::Template::fairing())
     .launch();
 }

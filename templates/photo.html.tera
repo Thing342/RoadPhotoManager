@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Rocket Demo</title>
+  <link rel="stylesheet" href="static/style.css">
+</head>
+<body>
+  <h1>Photo</h1>
+  <div class="container">
+    <img src="{{ file.file_uri }}" alt="{{ photo.alt_text }}" width="800">
+    <p>{{ photo.caption }}</p>
+    <p>Uploaded at {{ photo.uploaded_at }}</p>
+    Location: <ul>
+      <li>
+        {% if location.city %} {{location.city}}, {% endif %}
+        {% if location.county %} {{location.county}}, {% endif %}
+        {% if location.tm_region %} {{location.tm_region}}, {% endif %}
+        {% if location.tm_country %} {{location.tm_country}} {% endif %}
+      </li>
+      {% if location.lat and location.lng %}
+        <li>({{ location.lat }}, {{ location.lng }}</li>
+      {% endif %}
+    </ul>
+  </div>
+</body>
+</html>
