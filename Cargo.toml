@@ -1,0 +1,44 @@
+[package]
+name = "PhotoManager"
+version = "0.1.0"
+authors = ["Wes Jordan <wes@wesj.org>"]
+
+# bin is the entry point for `cargo run` or `cargo build`
+[[bin]]
+name = "main"
+path = "src/bin/main.rs"
+
+# lib is the entry point for all our main app code
+# it will import everything and also set up some app wide config
+# so it can all be imported into our `bin`
+[lib]
+name = "PhotoManagerLib"
+path = "src/lib.rs"
+
+[dependencies]
+# Server
+rocket = "0.3.6"
+rocket_codegen = "0.3.6"
+rocket_contrib = { version = "0.3.6", default-features = false, features = ["tera_templates"] }
+
+# Serde
+serde = "1.0.27"
+serde_derive = "1.0.27"
+serde_json = "1.0.9"
+
+# Templating
+tera = "0.11.2"
+
+# DB
+diesel = { version = "1.0.0", features = ["postgres", "chrono"] }
+diesel_codegen = "0.16.0"
+
+# R2D2
+r2d2 = "0.8.2"
+r2d2-diesel = "1.0.0"
+
+# SYS
+dotenv = "0.10.1"
+
+# Others
+chrono = { version = "0.4", features = ["serde"]}
