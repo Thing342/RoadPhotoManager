@@ -5,10 +5,25 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Rocket Demo</title>
+  <link rel="stylesheet" href="static/style.css">
 </head>
 <body>
   <h1>Rocket CMS Demo</h1>
   <div class="container">
+    <form action="/" method="post">
+      <label for="caption">Caption: </label>
+      <input type="text" name="caption" id="photo-caption">
+      <label for="alt_text">Alt Text: </label>
+      <input type="text" name="alt_text" id="photo-alt-text">
+      <label for="photo_type">Photo Type: </label>
+      <select name="photo_type" id="photo-type">
+        <option value="UNCAT">Uncategorized</option>
+        <option value="BGS">BGS</option>
+        <option value="LGS">LGS</option>
+        <option value="POST">Signposting</option>
+      </select>
+      <input type="submit">
+    </form>
     {% for photo in photos %}
       <div>
         <img src="badsrc.png" alt="{{ photo.alt_text }}">

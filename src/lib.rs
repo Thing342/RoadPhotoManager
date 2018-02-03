@@ -1,3 +1,6 @@
+#![feature(plugin, custom_derive)]
+#![plugin(rocket_codegen)]
+
 #[macro_use] extern crate diesel; // Diesel libs
 #[macro_use] extern crate diesel_codegen; // Code generation libs
 

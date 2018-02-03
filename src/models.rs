@@ -12,7 +12,7 @@ pub struct Photo {
     pub alt_text: String
 }
 
-#[derive(Debug, Insertable)]
+#[derive(Debug, Insertable, FromForm)]
 #[table_name = "photo"]
 pub struct NewPhoto {
     pub photo_type: String,
