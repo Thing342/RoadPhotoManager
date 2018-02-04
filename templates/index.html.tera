@@ -1,0 +1,12 @@
+{% extends "base" %}
+
+{% block title %}Index{% endblock title %}
+
+{% block head %}{% endblock head %}
+
+{% block content %}
+<ul>
+    <li><a href="/photo">Photos</a></li>
+    <li><a href="/tag">Tags</a></li>
+</ul>
+{% endblock content %}

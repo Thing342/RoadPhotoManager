@@ -19,7 +19,7 @@ fn index(connection: DbConn) -> rocket_contrib::Template {
 
     context.add("content", &content);
 
-    rocket_contrib::Template::render("base", context)
+    rocket_contrib::Template::render("photo_list", context)
 }
 
 #[post("/", data="<photo_json>")]

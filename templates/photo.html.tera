@@ -1,38 +1,36 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Rocket Demo</title>
-  <link rel="stylesheet" href="static/style.css">
-</head>
-<body>
-  <h1>{{ photo.alt_text }}</h1>
-  <a href="/">Home</a>
-  <div class="container">
-    <img src="{{ file.file_uri }}" alt="{{ photo.alt_text }}" width="800">
-    <p>{{ photo.caption }}</p>
-    <p>Uploaded at {{ photo.uploaded_at }}</p>
-    <h2>Location:</h2>
-    <ul>
-      <li>
-        {% if location.city %} {{location.city}}, {% endif %}
-        {% if location.county %} {{location.county}}, {% endif %}
-        {% if location.tm_region %} {{location.tm_region}}, {% endif %}
-        {% if location.tm_country %} {{location.tm_country}} {% endif %}
-      </li>
-      {% if location.lat and location.lng %}
-        <li>({{ location.lat }}, {{ location.lng }}</li>
-      {% endif %}
-    </ul>
-    <h2>Tags:</h2>
-    <p>
-      {% for tag in tags %}
-      <a href="/tags/{{ tag.photo_tag }}">{{ tag.photo_tag }}</a>
-      {% if tag.note %} ({{ tag.note }}) {% endif %},
-      {% endfor %}
-    </p>
-  </div>
-</body>
-</html>
+{% extends "base" %}
+
+{% block title %}{{ photo.alt_text }}{% endblock title %}
+
+{% block head %}{% endblock head %}
+
+{% block content %}
+<span>
+  <a href="/">Home</a> >
+  <a href="/photo">Photos</a> >
+  {{ photo.alt_text }}
+</span>
+<h2>{{ photo.alt_text }}</h2>
+<img src="{{ file.file_uri }}" alt="{{ photo.alt_text }}" width="800">
+<p>{{ photo.caption }}</p>
+<p>Uploaded at {{ photo.uploaded_at }}</p>
+<h3>Location:</h3>
+<ul>
+  <li>
+    {% if location.city %} {{location.city}}, {% endif %}
+    {% if location.county %} {{location.county}}, {% endif %}
+    {% if location.tm_region %} {{location.tm_region}}, {% endif %}
+    {% if location.tm_country %} {{location.tm_country}} {% endif %}
+  </li>
+  {% if location.lat and location.lng %}
+  <li>({{ location.lat }}, {{ location.lng }}</li>
+  {% endif %}
+</ul>
+<h3>Tags:</h3>
+<p>
+  {% for tag in tags %}
+  <a href="/tag/{{ tag.photo_tag }}">{{ tag.photo_tag }}</a>
+  {% if tag.note %} ({{ tag.note }}) {% endif %},
+  {% endfor %}
+</p>
+{% endblock content %}

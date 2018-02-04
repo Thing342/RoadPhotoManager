@@ -1,0 +1,25 @@
+{% extends "base" %}
+
+{% block title %}Index{% endblock title %}
+
+{% block head %}{% endblock head %}
+
+{% block content %}
+<span>
+  <a href="/">Home</a> > Photos
+</span>
+<h2>Photos</h2>
+{% for item in content %}{% for file in item.1 %}
+    <div>
+        <a href="/photo/{{ item.0.id }}">
+            <img src="{{ file.file_uri }}" alt="{{ item.0.alt_text }}" width="400">
+        </a>
+        <h4><a href="/photo/{{ item.0.id }}">{{ item.0.alt_text }}</a></h4>
+        <p>{{ item.0.caption }} ({{ file.file_size }} kB)
+        <form method="post" action="/photo/delete/{{item.0.id}}" onsubmit="setTimeout(function () { window.location.reload(); }, 10)">
+            <input type="submit" value="Delete">
+        </form>
+        </p>
+    </div>
+{% endfor %}{% endfor %}
+{% endblock content %}
