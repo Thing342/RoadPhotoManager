@@ -8,7 +8,8 @@
   <link rel="stylesheet" href="static/style.css">
 </head>
 <body>
-  <h1>Photo</h1>
+  <h1>{{ photo.alt_text }}</h1>
+  <a href="/">Home</a>
   <div class="container">
     <img src="{{ file.file_uri }}" alt="{{ photo.alt_text }}" width="800">
     <p>{{ photo.caption }}</p>

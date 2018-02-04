@@ -1,0 +1,31 @@
+{
+  "photo": {
+    "photo_type": "UNCAT",
+    "caption": "US-219 SB in Garrett County, MD",
+    "alt_text": "US-219 SB"
+  },
+  "loc": {
+    "photo_id": 0,
+    "tm_country": "USA",
+    "tm_region": "MD",
+    "county": "Garrett"
+  },
+  "file": {
+    "photo_id": 0,
+    "file_size": 817,
+    "file_mime": "image/jpeg",
+    "file_uri": "http://wesj.org/roads/wp-content/uploads/2018/02/us219.jpg",
+    "photo_width": 3273,
+    "photo_height": 1841
+  },
+  "tags": [
+    {
+      "photo_id": 0,
+      "photo_tag": "US-219"
+    },
+    {
+      "photo_id": 0,
+      "photo_tag": "twolaners"
+    }
+  ]
+}

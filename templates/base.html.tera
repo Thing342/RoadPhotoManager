@@ -10,20 +10,15 @@
 <body>
   <h1>Rocket CMS Demo</h1>
   <div class="container">
-    <form action="/" method="post">
-      <label for="photo-caption">Caption: </label>
-      <input type="text" name="caption" id="photo-caption">
-      <label for="photo-alt-text">Alt Text: </label>
-      <input type="text" name="alt_text" id="photo-alt-text">
-      <label for="photo-type">Photo Type: </label>
-      <select name="photo_type" id="photo-type">
-        <option value="UNCAT">Uncategorized</option>
-        <option value="BGS">BGS</option>
-        <option value="LGS">LGS</option>
-        <option value="POST">Signposting</option>
-      </select>
-      <input type="submit">
-    </form>
+    {% for item in content %}{% for file in item.1 %}
+        <div>
+            <a href="/{{ item.0.id }}">
+                <img src="{{ file.file_uri }}" alt="{{ item.0.alt_text }}" width="400">
+            </a>
+            <h4><a href="/{{ item.0.id }}">{{ item.0.alt_text }}</a></h4>
+            <p>{{ item.0.caption }} ({{ file.file_size }} kB)</p>
+        </div>  
+    {% endfor %}{% endfor %}
   </div>
 </body>
 </html>

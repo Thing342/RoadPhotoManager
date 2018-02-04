@@ -3,12 +3,21 @@ extern crate tera;
 
 use super::*;
 
+type TemplateOr404 = Result<rocket_contrib::Template, rocket::response::status::NotFound<String>>;
+
 #[get("/")]
 fn index(connection: DbConn) -> rocket_contrib::Template {
     let mut context = tera::Context::new();
-    let photos = schema::photo::table.load::<models::Photo>(&*connection).expect("Error loading photos");
+    let photos = schema::photo::table.load::<models::Photo>(&*connection)
+        .expect("Error loading photos");
+    let files = models::PhotoFile::belonging_to(&photos)
+        .load::<models::PhotoFile>(&*connection)
+        .expect("Error loading photo file info")
+        .grouped_by(&photos);
 
-    context.add("photos", &photos);
+    let content = photos.into_iter().zip(files).collect::<Vec<_>>();
+
+    context.add("content", &content);
 
     rocket_contrib::Template::render("base", context)
 }
@@ -50,7 +59,7 @@ fn new<'a>(connection: DbConn, photo_json: rocket_contrib::Json<models::NewPhoto
 }
 
 #[get("/<id>")]
-fn show(connection: DbConn, id: i32) -> Result<rocket_contrib::Template, rocket::response::status::NotFound<String>> {
+fn show(connection: DbConn, id: i32) -> TemplateOr404 {
     fn query(connection: DbConn, id: i32) -> Result<tera::Context, diesel::result::Error> {
         let mut context = tera::Context::new();
         let photo: models::Photo = schema::photo::table.find(id)
