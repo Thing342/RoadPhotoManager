@@ -24,8 +24,6 @@ fn index(connection: DbConn) -> rocket_contrib::Template {
 
 #[post("/", data="<photo_json>")]
 fn new<'a>(connection: DbConn, photo_json: rocket_contrib::Json<models::NewPhotoUpload>) -> rocket::Response<'a> {
-    use rocket::response::*;
-
     let mut upload_data: models::NewPhotoUpload = photo_json.into_inner();
 
     let newphoto: models::Photo = diesel::insert_into(schema::photo::table)
@@ -58,6 +56,19 @@ fn new<'a>(connection: DbConn, photo_json: rocket_contrib::Json<models::NewPhoto
         .finalize()
 }
 
+#[post("/delete/<id>")]
+fn delete(connection: DbConn, id: i32) -> Result<rocket::response::status::NoContent, rocket::response::status::NotFound<String>> {
+    fn query(connection: DbConn, id: i32) -> Result<(), diesel::result::Error> {
+        diesel::delete(schema::photo::table.find(id)).execute(&*connection)?;
+        Ok(())
+    }
+
+    match query(connection, id) {
+        Ok(_) => Ok(rocket::response::status::NoContent),
+        Err(err) => Err(rocket::response::status::NotFound(err.to_string()))
+    }
+}
+
 #[get("/<id>")]
 fn show(connection: DbConn, id: i32) -> TemplateOr404 {
     fn query(connection: DbConn, id: i32) -> Result<tera::Context, diesel::result::Error> {
@@ -67,10 +78,12 @@ fn show(connection: DbConn, id: i32) -> TemplateOr404 {
 
         let loc: models::PhotoLocation = models::PhotoLocation::belonging_to(&photo).first(&*connection)?;
         let file: models::PhotoFile = models::PhotoFile::belonging_to(&photo).first(&*connection)?;
+        let tags: Vec<models::PhotoTag> = models::PhotoTag::belonging_to(&photo).load(&*connection)?;
 
         context.add("photo", &photo);
         context.add("location", &loc);
         context.add("file", &file);
+        context.add("tags", &tags);
 
         Ok(context)
     }

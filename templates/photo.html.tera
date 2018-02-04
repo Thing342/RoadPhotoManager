@@ -14,7 +14,8 @@
     <img src="{{ file.file_uri }}" alt="{{ photo.alt_text }}" width="800">
     <p>{{ photo.caption }}</p>
     <p>Uploaded at {{ photo.uploaded_at }}</p>
-    Location: <ul>
+    <h2>Location:</h2>
+    <ul>
       <li>
         {% if location.city %} {{location.city}}, {% endif %}
         {% if location.county %} {{location.county}}, {% endif %}
@@ -25,6 +26,13 @@
         <li>({{ location.lat }}, {{ location.lng }}</li>
       {% endif %}
     </ul>
+    <h2>Tags:</h2>
+    <p>
+      {% for tag in tags %}
+      <a href="/tags/{{ tag.photo_tag }}">{{ tag.photo_tag }}</a>
+      {% if tag.note %} ({{ tag.note }}) {% endif %},
+      {% endfor %}
+    </p>
   </div>
 </body>
 </html>
